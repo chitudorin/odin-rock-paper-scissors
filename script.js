@@ -69,4 +69,11 @@ function game() {
   }
 }
 
-game();
+const buttons = document.querySelectorAll("button");
+
+buttons.forEach((button) => {
+  button.addEventListener("click", () => {
+    // console.log("forEach worked");
+    console.log(playRound(button.innerHTML, getComputerChoice()));
+  });
+});
