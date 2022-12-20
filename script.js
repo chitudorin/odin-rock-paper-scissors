@@ -70,10 +70,30 @@ function game() {
 }
 
 const buttons = document.querySelectorAll("button");
+const outcome = document.querySelector("div.outcome");
+const score = document.querySelector("div.score");
+
+let playerScore = 0;
+let computerScore = 0;
 
 buttons.forEach((button) => {
   button.addEventListener("click", () => {
-    // console.log("forEach worked");
-    console.log(playRound(button.innerHTML, getComputerChoice()));
+
+    outcome.textContent = playRound(button.innerHTML, getComputerChoice());
+    if (outcome.textContent.charAt(4) === "w") {
+      playerScore++;
+    } else if (outcome.textContent.charAt(4) === "l") {
+      computerScore++;
+    }
+    score.textContent = `The score is ${playerScore}-${computerScore}!`;
+    if (playerScore === 5 || computerScore === 5) {
+      if (playerScore > computerScore) {
+        outcome.textContent = "You won the game!";
+      } else {
+        outcome.textContent = "You lost the game!";
+      }
+      computerScore = 0;
+      playerScore = 0;
+    }
   });
 });
